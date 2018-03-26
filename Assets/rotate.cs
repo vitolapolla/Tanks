@@ -9,8 +9,14 @@ public class rotate : MonoBehaviour {
 	public float amplitude = 0.5f;
 	public float frequency = 1f;
 
+	public float duration = 5f;
 
-	public float maxTime = 5f;
+	private Light myLight;
+
+	public GameObject Light1;
+
+
+	public float maxTime = 10f;
 	float timeLeft;
 
 	// Position Storage Variables
@@ -21,6 +27,9 @@ public class rotate : MonoBehaviour {
 	void Start () {
 		// Store the starting position & rotation of the object
 		posOffset = transform.position;
+
+		myLight = GetComponent<Light>();
+
 	}
 	
 	// Update is called once per frame
@@ -34,33 +43,49 @@ public class rotate : MonoBehaviour {
 
 		transform.position = tempPos;
 
+		Debug.Log (timeLeft);
+
+
 	}
 
 	void OnTriggerEnter(Collider other) {
 		Debug.Log ("collide with sphere");
-
-		Timer ();
 		timeLeft = maxTime;
+		Timer ();
 
-	
 		Destroy(gameObject);
 
+		Light1.enabled = !Light1.enabled;
 
 
+		StartCoroutine (Lights() );
+
+
+	
+
+
+
+
+	}
+
+	IEnumerator Lights(){
+		print(Time.time);
+		yield return new WaitForSeconds(5);
+		Debug.Log ("Lights");
 	}
 
 
 	void Timer (){
 		if (timeLeft > 0) {
+			
 			Debug.Log ("Lights on");
-
-			timeLeft -= Time.deltaTime;
+			timeLeft = maxTime;
 
 
 		} else {
 
-			Debug.Log ("Lights off");
 
+			Debug.Log ("Lights off");
 
 		}
 	}
