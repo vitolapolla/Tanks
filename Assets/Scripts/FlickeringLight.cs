@@ -10,6 +10,19 @@ public class FlickeringLight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
+		light ();
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+
+		
+	}
+
+	void light (){
 		testLight = GetComponent<Light>();
 		StartCoroutine(Flashing());
 	}
@@ -21,11 +34,5 @@ public class FlickeringLight : MonoBehaviour {
 			testLight.enabled = !testLight.enabled;
 
 		}
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
